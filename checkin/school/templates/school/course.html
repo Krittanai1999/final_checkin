@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2 class="text-light">COURSE INFORMATION
+        
+        <a href="{% url 'course_add' %}"><button type="button"
+                class="btn btn-secondary ml-3 btn btn-warning ">CREATE NEW  COURSE</button></a>
+            </h2><hr class="bg-light">
+            <form class="form-inline" method="POST" action="{% url 'index' %}">
+              {% csrf_token %}
+              <div class="form-group">
+                  <label for="inputSearch">SEARCH COUSRE : </label>&emsp;
+                  <input type="text" class="form-control form-control-sm" id="inputSearch" name="search"
+                      placeholder="ค้นหาชื่อวิชา">
+              </div>
+              <button type="submit" class="btn btn-primary ml-3">SEARCH</button>
+          </form><br/>
+            <div class="row row-cols-1 row-cols-md-3">
+                <div class="col mb-4">
+                  <div class="card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">SUBJECT : </h5>
+                      <p class="card-text">COURSE ID :</p>
+                      <p class="card-text">ROOM : </p>
+                      <p class="card-text">TEACHER :</p>
+                      <p class="card-text">DAY :</p>
+                      <p class="card-text">TIME :</p>
+                      <p class="card-text text-light"><a href="#">
+                        <div class="btn btn-warning" id="test">EDIT</div>
+                    </a></small></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        
+
+
+</div>
+{% endblock %}
+

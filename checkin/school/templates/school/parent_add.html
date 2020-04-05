@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h3 class="text-light text-center">CREATE/EDIT PARENT INFORMATION</h3>
+  <hr class="bg-light">
+  {% if parent.id %}
+  <!-- Submit to class_update view -->
+  <form method="POST" action="{% url 'parent_update' parent_id=parent.id %}">
+    {% else %}
+    <!-- Submit to class_add view -->
+    <form method="POST" action="{% url 'parent_add' %}">
+      {% endif %}
+      {% csrf_token %}
+      {% if msg %}<p class="text-success">{{msg}}</p>{% endif %}
+
+      <h5 class="card-title text-light">PARENT</h5>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">FIRSTNAME</label>
+          <input type="text" class="form-control" id="first_name1" name="first_name1" value="{{parent.first_name1}}"
+            required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">LASTNAME</label>
+          <input type="text" class="form-control" id="last_name1" name="last_name1" value="{{parent.last_name1}}"
+            required>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputPassword4">RELATION</label>
+          <input type="text" class="form-control" id="relation" name="relation" value="{{parent.relation}}" required>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputEmail4">OCCUPATION</label>
+          <input type="text" class="form-control" id="work" name="work" value="{{parent.work}}" required>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputPassword4">INCOME</label>
+          <input type="text" class="form-control" id="income" name="income" value="{{parent.income}}" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">MOBILE NO.</label>
+          <input type="tel" class="form-control" id="tel1" name="tel1" value="{{parent.tel1}}" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">EMAIL</label>
+          <input type="email" class="form-control" id="email1" name="email1" value="{{parent.email1}}" required>
+        </div>
+        <div class="form-group col-md-8">
+          <label for="inputAddress">Address</label>
+          <input type="text" class="form-control" id="address1" name="address1" value="{{parent.address1}}" required>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputAddress">TYPE HOUSE</label>
+          <input type="text" class="form-control" id="type_house" name="type_house" value="{{parent.type_house}}"
+            required>
+        </div>
+      </div>
+
+      <button type="reset" class="btn btn-warning ml-3">RESET</button>
+      <button type="submit" class="btn btn-primary">COMFIRM</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2 class="text-light">CHECK IN SCHOOL
+    </h2><hr class="bg-light">
+    <p class="card-text">
+        <h5 class="card-title text-light">INFORMATION</h5>
+        <p>FIRSTNAME : &emsp;&emsp;LASTNAME : &emsp;&emsp;STUDENT ID : </p>
+        <p>CLASS : &emsp;&emsp;STUDENT NO. : &emsp;&emsp;TRACK : </p>
+        <p>SCORE : &emsp;&emsp;</p>
+    </p>
+    <h5 class="card-title text-light">LIST</h5>
+        <hr class="bg-light">
+        <table class="table table-hove">
+            <thead class="thead-dark text-center">
+                <tr>
+                    <th scope="col">FIRSTNAME</th>
+                    <th scope="col">LASTNAME</th>
+                    <th scope="col">STUDENT ID</th>
+                    <th scope="col">SCORE</th>
+                    <th scope="col">EDIT</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+              
+                <tr>
+                    <td>test</td>
+                    <td>test</td>
+                    <td>{test</td>
+                    <td>{test</td>
+                    <td><a href="{% url 'scoreedit' %}">
+                        <div class="btn btn-warning" id="test">EDIT</div>
+                    </a><td>
+                    
+                 
+                </tr>
+                
+            </tbody>
+        </table>
+</div>
+{% endblock %}
+

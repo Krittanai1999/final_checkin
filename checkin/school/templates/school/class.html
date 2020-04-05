@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2 class="text-light">CHECK IN CLASS
+    </h2>
+    <hr class="bg-light">
+    <form class="form-inline" method="POST" action="{% url 'index' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="inputSearch">SEARCH COUSRE : </label>&emsp;
+            <input type="text" class="form-control form-control-sm" id="inputSearch" name="search"
+                placeholder="ค้นหาชื่อวิชา">
+        </div>
+        <button type="submit" class="btn btn-primary ml-3">SEARCH</button>
+    </form><br/>
+    <p class="card-text">
+        <div class="card">
+            <h5 class="card-header">COURSE ID : <br>SUBJECT :</h5>
+            <div class="card-body">
+                <!--
+                <p class="card-text">SUBJECT :</p>
+                <p class="card-text">TEACHER :</p>
+                <p class="card-text">DAY :</p>
+                <p class="card-text">TIME :</p>
+                <p class="card-text">CAPACITY :</p>-->
+                <p class="card-text">CHECK IN CLASS : <a href="{% url 'check_class' %}"><button type="button"
+                            class="btn btn-secondary ml-3 btn btn-success ">CHECK IN</button></a>&emsp;&emsp;&emsp;&emsp;
+                DETAIL : <a href="{% url 'detailclass' %}"><button type="button"
+                            class="btn btn-secondary ml-3 btn btn-warning ">DETAIL</button></a></p>
+            </div>
+        </div>
+    </p>
+</div>
+{% endblock %}

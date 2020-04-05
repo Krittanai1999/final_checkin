@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h3 class="text-light text-center">EDIT STUDENT INFORMATION</h3>
+  <hr class="bg-light">
+  <h5 class="card-title text-light">STUDENT</h5>
+
+    <!-- Submit to student_add view -->
+    <form method="POST" action="{% url 'student_add' %}">
+      
+      {% csrf_token %}
+      {% if msg %}<p class="text-success">{{msg}}</p>{% endif %}
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="inputEmail4">FIRSTNAME</label>
+          <input type="text" class="form-control" id="first_name" name="first_name" value="{{student.first_name}}" required>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputPassword4">LASTNAME</label>
+          <input type="text" class="form-control" id="last_name" name="last_name" value="{{student.last_name}}" required>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputPassword4">STUDENT ID</label>
+          <input type="text" class="form-control" id="username" name="username" value="{{student.username}}" required>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputEmail4">DATE OF BIRTH</label>
+          <input type="date" id="datepicker" class="form-control" id="date_of_birth" name="date_of_birth" value="{{student.date_of_birth}}" required>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputPassword4">AGE</label>
+          <input type="text" class="form-control" id="age" name="age" value="{{student.age}}" required>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="section">GENDER</label>
+          <select class="form-control" id="gender" name="gender" required>
+            <option value=''>---SELECT---</option>
+            {% for gen in gender %}
+            <option value='{{gen.0}}' {% if student.gender == gender %}selected{% endif %}>
+                {{gen.1}}
+            </option>
+            {% endfor %}
+        </select>
+        </div>
+        
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">MOBILE NO.</label>
+          <input type="tel" class="form-control" id="tel" name="tel" value="{{student.tel}}" required">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">EMAIL</label>
+          <input type="email" class="form-control" id="email" name="email" value="{{student.email}}" required>
+        </div>
+
+      </div>
+      <div class="form-group">
+        <label for="inputAddress">Address</label>
+        <input type="text" class="form-control" placeholder="1234 Main St" id="address" name="address" value="{{student.address}}" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="inputPassword4">CLASS</label>
+          <input type="text" class="form-control" id="class" name="class" value="{{student.class}}" required>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputPassword4">STUDENT NO.</label>
+          <input type="text" class="form-control" id="stu_no" name="stu_no" value="{{student.stu_no}}" required>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputPassword4">TRACK</label>
+          <input type="text" class="form-control" id="track" name="track" value="{{student.track}}" required>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="section">PARENT</label>
+          <select class="form-control" id="parent" name="parent" required>
+            <option value=''>---SELECT---</option>
+            {% for pr in parent %}
+            <option value='{{ pr.id }}'>{{pr.fname}} {{pr.lname}}</option>
+  
+            {% endfor %}
+        </select>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="section">TEACHER</label>
+          <select class="form-control" id="teacher" name="teacher" required>
+            <option value=''>---SELECT---</option>
+            {% for th in teacher %}
+            <option value='{{ th.id }}'>{{th.fname}}  {{th.lname}}</option>
+  
+            {% endfor %}
+        </select>
+        </div>
+
+      </div>
+      
+      <!--
+      <h5 class="card-title text-light">PARENT</h5>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">FIRSTNAME</label>
+          <input type="text" class="form-control" id="first_name1" name="first_name1" value="{{parent.first_name1}}" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">LASTNAME</label>
+          <input type="text" class="form-control" id="last_name1" name="last_name1" value="{{parent.last_name1}}" required>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputPassword4">RELATION</label>
+          <input type="text" class="form-control" id="relation" name="relation" value="{{parent.relation}}" required>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputEmail4">OCCUPATION</label>
+          <input type="text" class="form-control" id="work" name="work" value="{{parent.work}}" required>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputPassword4">INCOME</label>
+          <input type="text" class="form-control" id="income" name="income" value="{{parent.income}}" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">MOBILE NO.</label>
+          <input type="tel" class="form-control" id="tel1" name="tel1" value="{{parent.tel1}}" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">EMAIL</label>
+          <input type="email" class="form-control" id="email1" name="email1" value="{{parent.email1}}" required>
+        </div>
+        <div class="form-group col-md-8">
+          <label for="inputAddress">Address</label>
+          <input type="text" class="form-control" id="address1" name="address1" value="{{parent.address1}}" required>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputAddress">TYPE HOUSE</label>
+          <input type="text" class="form-control" id="type_house" name="type_house" value="{{parent.type_house}}" required>
+        </div>
+      </div>-->
+
+      <button type="reset" class="btn btn-warning ml-3">RESET</button>
+      <button type="submit" class="btn btn-primary">COMFIRM</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h3 class="text-light text-center">CREATE NEW TEACHER INFORMATION</h3>
+  <hr class="bg-light">
+  {% if teacher.id %}
+  <form method="POST" action="{% url 'teacher_update' teacher_id=teacher.id %}">
+    {% else %}
+    <form method="POST" action="{% url 'teacher_add' %}">
+      {% endif %}
+      {% csrf_token %}
+      {% if msg %}<p class="text-success">{{msg}}</p>{% endif %}
+
+      <h5 class="card-title text-light">TEACHER</h5>
+      <form>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="inputEmail4">FIRSTNAME</label>
+            <input type="text" class="form-control" id="fname" name="fname" value="{{teacher.fname}}">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputPassword4">LASTNAME</label>
+            <input type="text" class="form-control" id="lname" name="lname" value="{{teacher.lname}}">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputPassword4">TEACHER ID</label>
+            <input type="text" class="form-control" id="username" name="username" value="{{teacher.tea_code}}">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputPassword4">ROOM</label>
+            <input type="text" class="form-control" id="room" name="room" value="{{teacher.room}}">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputPassword4">MOBILE NO.</label>
+            <input type="tel" class="form-control" id="tel" name="tel" value="{{teacher.tel}}">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputPassword4">EMAIL</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{teacher.email}}">
+          </div>
+          {% comment %} <form>
+            <div class="form-group col-md-4">
+              <label for="exampleFormControlFile1">UPLOAD PICTURE</label>
+              <input type="file" class="form-control-file" id="exampleFormControlFile1">
+            </div>
+          </form> {% endcomment %}
+
+        </div>
+        <button type="submit" class="btn btn-primary">COMFIRM</button>
+        <button type="reset" class="btn btn-warning ml-3">RESET</button>
+      </form>
+</div>
+{% endblock %}

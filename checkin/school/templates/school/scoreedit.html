@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2 class="text-light">CHECK IN SCHOOL
+    </h2><hr class="bg-light">
+    <p class="card-text">
+        <h5 class="card-title text-light">INFORMATION</h5>
+        <p>FIRSTNAME : &emsp;&emsp;LASTNAME : &emsp;&emsp;STUDENT ID : </p>
+        <p>CLASS : &emsp;&emsp;STUDENT NO. : &emsp;&emsp;TRACK : </p>
+        <p>SCORE : &emsp;&emsp;</p>
+    </p>
+    <h5 class="card-titletext-light">เกณฑ์การหักคะแนน</h5>
+    <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          มาสาย
+          <span class="badge badge-primary badge-pill">-3</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          แต่งกายผิดระเบียบ
+          <span class="badge badge-primary badge-pill">-5</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          ทรงผมผิดระเบียบ
+          <span class="badge badge-primary badge-pill">-5</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            ผิดระเบียบทั่วไป (พกเครื่องดื่มแอลกอฮอล์ม, บุหรี่ และอื่นๆ)
+            <span class="badge badge-primary badge-pill">-10</span>
+          </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            กระทำความรุนแรงมีผลต่อโรงเรียน
+            <span class="badge badge-primary badge-pill">-30</span>
+          </li>
+      </ul><br/>
+      <form>
+      <p class="card-title">หักคะแนน
+        <div class="form-group form-check">
+          <input name='checkbox' type="checkbox" class="form-check-input" id="exampleCheck1" value="comfirm">
+          <label class="form-check-label" for="exampleCheck1">มาสาย</label>
+        </div>
+        <div class="form-group form-check">
+            <input name='checkbox' type="checkbox" class="form-check-input" id="exampleCheck1" value="comfirm">
+            <label class="form-check-label" for="exampleCheck1">แต่งกายผิดระเบียบ</label>
+          </div>
+          <div class="form-group form-check">
+            <input name='checkbox' type="checkbox" class="form-check-input" id="exampleCheck1" value="comfirm">
+            <label class="form-check-label" for="exampleCheck1">ทรงผมผิดระเบียบ</label>
+          </div>
+          <div class="form-group form-check">
+            <input name='checkbox' type="checkbox" class="form-check-input" id="exampleCheck1" value="comfirm">
+            <label class="form-check-label" for="exampleCheck1">ผิดระเบียบทั่วไป</label>
+          </div>
+          <div class="form-group form-check">
+            <input name='checkbox' type="checkbox" class="form-check-input" id="exampleCheck1" value="comfirm">
+            <label class="form-check-label" for="exampleCheck1">กระทำความรุนแรงมีผลต่อโรงเรียน</label>
+          </div>
+      </p>
+      <button type="submit" class="btn btn-primary ml-3">SUMMIT</button>
+    </form>
+</div>
+{% endblock %}
+

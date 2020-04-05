@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2 class="text-light">STUDENT INFORMATION
+
+        <a href="{% url 'student_add' %}"><button type="button" class="btn btn-secondary ml-3 btn btn-warning ">CREATE
+                NEW STUDENT</button></a>
+        <a href="{% url 'parent_add' %}"><button type="button" class="btn btn-secondary ml-3 btn btn-warning ">CREATE
+                NEW PARENT</button></a>
+
+    </h2>
+    <hr class="bg-light">
+    <form class="form-inline" method="POST" action="{% url 'index' %}">
+        {% csrf_token %}
+        <div class="form-group col-md-4">
+            <label for="inputSearch">SEARCH STUDENT : </label>&emsp;
+            <input type="text" class="form-control form-control-sm" id="inputSearch" name="search"
+                placeholder="รหัสนักเรียน หรือ ชื่อ-สกุล">
+        </div>&emsp;
+        <div class="form-group col-md-4">
+            <label for="inputSearch">SEARCH PARENT : </label>&emsp;
+            <input type="text" class="form-control form-control-sm" id="inputSearch" name="search"
+                placeholder="ผู้ปกครอง">
+        </div>&emsp;
+
+        <button type="submit" class="btn btn-primary ml-3">SEARCH</button>
+    </form><br />
+    <div class="card">
+        <div class="card-header">
+            STUDENT
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">INFORMATION</h5>
+            <p class="card-text">FIRSTNAME : {{user.id.fname}}&emsp;&emsp;LASTNAME : {{request.student.lname}}
+                {{request.student.lname}}&emsp;&emsp;STUDENT ID : {{request.user.username}}</p>
+            <p class="card-text">DATE OF BIRTH : {{request.student.date_of_birth}}&emsp;&emsp;AGE :
+                {{request.student.age}}&emsp;&emsp;GENDER : {{request.student.gender}}</p>
+            <p class="card-text">MOBILE NO : {{request.student.tel}}&emsp;&emsp;EMAIL : {{request.student.email}}</p>
+            <p class="card-text">ADDRESS : {{request.student.adress}}</p>
+            <p class="card-text">CLASS : {{request.student.lname}}&emsp;&emsp;STUDENT NO : &emsp;&emsp;TRACK : </p>
+
+        </div>
+        <div class="card-header">
+            PARENT
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">INFORMATION</h5>
+            <p class="card-text">FIRSTNAME : &emsp;&emsp;LASTNAME : </p>
+            <p class="card-text">REALATION : &emsp;&emsp;OCCUPATION : &emsp;&emsp;INCOME : </p>
+            <p class="card-text">MOBILE NO : &emsp;&emsp;EMAIL : </p>
+            <p class="card-text">ADDRESS :</p>
+        </div>
+        <div class="card-header">
+            TEACHER :
+        </div>
+        <div class="card-header">
+            SCORE :
+        </div>
+    </div><br />
+    <h5 class="card-title text-light">LIST STUDENT</h5>
+    <hr class="bg-light">
+    <table class="table table-hove">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th scope="col">FIRSTNAME</th>
+                <th scope="col">LASTNAME</th>
+                <th scope="col">STUDENT ID</th>
+                <th scope="col">DETAIL</th>
+                <th scope="col">EDIT</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            {% for std in student %}
+            <tr>
+                <td>{{ std.fname }}</td>
+                <td>{{ std.lname }}</td>
+                <td>{{ std.stu_code}}</td>
+                <td><div class="btn btn-outline-success" id="{{stu.id}}">DEATIL</div></td>
+                <td>
+                    <a href="#">
+                        <div class="btn btn-outline-primary" id="{{stu.id}}">แก้ไข</div>
+                    </a>
+                    <a href="#">
+                        <div class="btn btn-outline-warning" id="{{std.id}}">ลบ</div>
+                    </a>
+
+                </td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+    <br />
+    <h5 class="card-title text-light">LIST PARENT</h5>
+    <hr class="bg-light">
+    <table class="table table-hove">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th scope="col">FIRSTNAME</th>
+                <th scope="col">LASTNAME</th>
+                <th scope="col">DETAIL</th>
+                <th scope="col">EDIT</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            {% for pr in parent %}
+            <tr>
+                <td>{{ pr.fname }}</td>
+                <td>{{ pr.lname }}</td>
+                <td><div class="btn btn-outline-success" id="{{stu.id}}">DEATIL</div></td>
+                <td>
+                    <a href="{% url 'parent_update' parent_id=pr.id %}">
+                        <div class="btn btn-outline-primary" id="{{pr.id}}">แก้ไข</div>
+                    </a>
+                    <a href="{% url 'parent_delete' parent_id=pr.id %}">
+                        <div class="btn btn-outline-warning" id="{{pr.id}}">ลบ</div>
+                    </a>
+
+                </td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
