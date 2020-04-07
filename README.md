@@ -29,4 +29,36 @@ finaltest
 
 1.เป้าหมายต่อไป!!!!!!!   ทำส่วนของ course จาก form html ธรรมดาให้เป็น django form หรือ model form ตามที่จารย์บอกว่าให้มีอย่างน้อย 1
 
+
+---UPDATE 7/4/63---
+
+Update 7/4/63
+เพิ่มไฟล์
+-	Studentdetail.html เพื่อแสดงข้อมูลของนักเรียนได้
+-	Parentdetail.html เพื่อแสดงข้อมูลของผู้ปกครองได้
+-	
+Index.html
+-	ยังไม่สามารถแสดงผลของตัวเองได้
+-
+View.py
+-	สามารถใช้ parent_update ได้แล้ว แต่ติดตรงที่ first_name, last_name ไม่แสดงผล
+-	สามารถใช้ parent_delete ได้แล้ว
+-	Student_update ยังใช้ไม่ได้ ติดตรงform
+-	สามารถใช้ student_delete ได้แล้ว
+-	teacher_update ได้แล้ว
+-	teacher_delete ติด FK มั้ง student
+-	def student_detail(request, student_id):
+-	def parent_detail(request, parent_id):
+-	ทั้งนักเรียนกับ ผปค แสดงข้อมูลได้แล้ว
+-
+Student_add.html
+-	มีการแก้ไข name, id คือ tel, email, address โดยการตัด 1 ท้ายชื่อออกหมด
+-
+School/Urls.py เพิ่ม
+- path('detail/student/<int:student_id>/', views.student_detail, name='student_detail'),
+- path('detail/parent/<int:parent_id>/', views.parent_detail, name='parent_detail'),
+-
+-เหลือ couse update.delete
+
+
  
