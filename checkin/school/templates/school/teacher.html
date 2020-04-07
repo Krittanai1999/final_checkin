@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container">
   <h2 class="text-light">TEACHER INFORMATION
-
+    
     <a href="{% url 'teacher_add' %}"><button type="button" class="btn btn-secondary ml-3 btn btn-warning ">CREATE NEW
         TEACHER</button></a>
   </h2>
@@ -33,9 +33,14 @@
           <p class="card-text">ROOM : {{ tea.room }}</p>
           <p class="card-text">MOBILE NO : {{ tea.tel }}</p>
           <p class="card-text">EMAIL : {{ tea.email }}</p>
-          <p class="card-text"><a href="#">
-              <div class="btn btn-warning" id="test">EDIT</div>
-            </a></p>
+          <p class="card-text">
+            <a href="{% url 'teacher_update' teacher_id=tea.id %}">
+              <div class="btn btn-outline-primary" id="{{tea.id}}">EDIT</div>
+          </a>
+          <a href="{% url 'teacher_delete' teacher_id=tea.id %}">
+              <div class="btn btn-outline-warning" id="{{tea.id}}">DELETE</div>
+          </a>
+          </p>
         </div>
       </div>
     </div>

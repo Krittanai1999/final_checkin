@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+ 
+    <div class="card-header">
+        STUDENT
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">INFORMATION</h5>
+        <p class="card-text">FIRSTNAME : {{student.fname}}&emsp;&emsp;LASTNAME : {{student.lname}}
+   &emsp;&emsp;STUDENT ID : {{student.stu_code}}</p>
+        <p class="card-text">DATE OF BIRTH : {{student.date_of_birth}}&emsp;&emsp;AGE :
+            {{student.age}}&emsp;&emsp;GENDER : {{student.gender}}</p>
+        <p class="card-text">MOBILE NO : {{student.tel}}&emsp;&emsp;EMAIL : {{student.email}}</p>
+        <p class="card-text">ADDRESS : {{student.address}}</p>
+        <p class="card-text">CLASS : {{student.class_room}}&emsp;&emsp;STUDENT NO : {{student.stu_no}}&emsp;&emsp;TRACK : {{student.track}}</p>     
+    </div>
+    <div class="card-header">
+        PARENT
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">INFORMATION</h5>
+        <p class="card-text">FIRSTNAME : {{student.parent_id.fname}}&emsp;&emsp;LASTNAME : {{student.parent_id.lname}}</p>
+        <p class="card-text">REALATION : {{student.parent_id.relation}}&emsp;&emsp;OCCUPATION : {{student.parent_id.work}}&emsp;&emsp;INCOME : {{student.parent_id.income}}</p>
+        <p class="card-text">MOBILE NO : {{student.parent_id.tel}}&emsp;&emsp;EMAIL : {{student.parent_id.email}}</p>
+        <p class="card-text">ADDRESS :{{student.parent_id.address}}</p>
+    </div>
+    <div class="card-header">
+        TEACHER :{{student.teacher_id.fname}} {{student.teacher_id.lname}} ( ครูที่ปรึกษา )
+    </div>
+    <div class="card-header">
+        SCORE : 100 
+    </div>
+</div><br/>
+    <a href="{% url 'index' %}">
+        <div class="btn btn-success">BACK TO HOME</div>
+    </a>
+{% endblock content %}
+

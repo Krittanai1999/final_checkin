@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+    <div class="card-header">
+        PARENT
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">INFORMATION</h5>
+        <p class="card-text">FIRSTNAME : {{parent.fname}}&emsp;&emsp;LASTNAME : {{parent.lname}}</p>
+        <p class="card-text">REALATION : {{parent.relation}}&emsp;&emsp;OCCUPATION : {{parent.work}}&emsp;&emsp;INCOME : {{parent.income}}</p>
+        <p class="card-text">MOBILE NO : {{parent.tel}}&emsp;&emsp;EMAIL : {{parent.email}}</p>
+        <p class="card-text">ADDRESS :{{parent.address}}</p>
+    </div>
+
+</div><br/>
+    <a href="{% url 'index' %}">
+        <div class="btn btn-success">BACK TO HOME</div>
+    </a>
+{% endblock content %}
+

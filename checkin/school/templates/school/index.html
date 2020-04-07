@@ -31,7 +31,7 @@
         </div>
         <div class="card-body">
             <h5 class="card-title">INFORMATION</h5>
-            <p class="card-text">FIRSTNAME : {{user.id.fname}}&emsp;&emsp;LASTNAME : {{request.student.lname}}
+            <p class="card-text">FIRSTNAME : {{student.fname}}&emsp;&emsp;LASTNAME : {{request.student.lname}}
                 {{request.student.lname}}&emsp;&emsp;STUDENT ID : {{request.user.username}}</p>
             <p class="card-text">DATE OF BIRTH : {{request.student.date_of_birth}}&emsp;&emsp;AGE :
                 {{request.student.age}}&emsp;&emsp;GENDER : {{request.student.gender}}</p>
@@ -75,13 +75,13 @@
                 <td>{{ std.fname }}</td>
                 <td>{{ std.lname }}</td>
                 <td>{{ std.stu_code}}</td>
-                <td><div class="btn btn-outline-success" id="{{stu.id}}">DEATIL</div></td>
+                <td><a href="{% url 'student_detail' student_id=std.id %}" class="btn btn-warning">VIEW DETAIL</a></td>
                 <td>
-                    <a href="#">
-                        <div class="btn btn-outline-primary" id="{{stu.id}}">แก้ไข</div>
+                    <a href="{% url 'student_update' student_id=std.id %}">
+                        <div class="btn btn-outline-primary" id="{{std.id}}">EDIT</div>
                     </a>
-                    <a href="#">
-                        <div class="btn btn-outline-warning" id="{{std.id}}">ลบ</div>
+                    <a href="{% url 'student_delete' student_id=std.id %}">
+                        <div class="btn btn-outline-warning" id="{{std.id}}">DELETE</div>
                     </a>
 
                 </td>
@@ -107,13 +107,13 @@
             <tr>
                 <td>{{ pr.fname }}</td>
                 <td>{{ pr.lname }}</td>
-                <td><div class="btn btn-outline-success" id="{{stu.id}}">DEATIL</div></td>
+                <td><a href="{% url 'parent_detail' parent_id=pr.id %}" class="btn btn-warning">VIEW DETAIL</a></td>
                 <td>
                     <a href="{% url 'parent_update' parent_id=pr.id %}">
-                        <div class="btn btn-outline-primary" id="{{pr.id}}">แก้ไข</div>
+                        <div class="btn btn-outline-primary" id="{{pr.id}}">EDIT</div>
                     </a>
                     <a href="{% url 'parent_delete' parent_id=pr.id %}">
-                        <div class="btn btn-outline-warning" id="{{pr.id}}">ลบ</div>
+                        <div class="btn btn-outline-warning" id="{{pr.id}}">DELETE</div>
                     </a>
 
                 </td>

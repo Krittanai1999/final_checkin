@@ -59,6 +59,21 @@ class Regis_school(models.Model):
 
 class Course(models.Model):
     name = models.CharField(max_length=50)
+    course_id = models.CharField(max_length=8, null=True)
+    room = models.CharField(max_length=4, null=True)
+    WEEKDAYS = (
+        ('M', 'Monday'),
+        ('T', 'Tuesday'),
+        ('W', 'Wednesday'),
+        ('TH', 'Thursday'),
+        ('F', 'Friday'),
+        ('S', 'Saturday'),
+        ('Su', 'Sunday'),
+    )
+    weekday = models.CharField(max_length=2, choices=WEEKDAYS, null=False)
+    capacity = models.SmallIntegerField(null=True)
+    start_time = models.TimeField(null=True)
+    end_time = models.TimeField(null=True)
     teach_course = models.ManyToManyField(Teacher)
 
 class Enroll(models.Model):

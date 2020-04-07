@@ -7,7 +7,8 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.db.models import Q
 
-from school.models import Student, Parent, Teacher
+from school.models import Student, Parent, Teacher, Course
+from school.forms import CourseForm
 
 
 # Create your views here.
@@ -47,6 +48,7 @@ def index(request):
     """
         Index page - หน้าจอรายการนักเรียนทั้งหมด
     """
+    #student = Student.objects.get(pk=student_id)
     student = Student.objects.all()
     parent = Parent.objects.all()
     search = request.GET.get('search', '')
@@ -60,6 +62,20 @@ def index(request):
     return render(request, 'school/index.html', context={
         'student': student,
         'parent' : parent
+    })
+
+def student_detail(request, student_id):
+    """
+        Class detail page – เมื่อกด link จากหน้า Index page มาจะได้หน้าจอแสดงรายละเอียดของแต่ละวิชา 
+        (วิชานี้สอนอะไร, มีจำนวนนักเรียนกี่คน, มีคนมาเรียน และขาดกี่คน)
+    """
+    #student = request.user.student
+    student = Student.objects.get(pk=student_id)
+   #student = Student.objects.all()
+    return render(request, 'school/studentdetail.html', context={
+        'student': student
+        #'std' : student_id
+        
     })
 
 def student_add(request):
@@ -119,6 +135,67 @@ def student_add(request):
 
     return render(request, 'school/student_add.html', context=context)
 
+def student_update(request, student_id):
+    """
+        #Update ข้อมูลนักเรียนที่มี id = parent_id
+    """
+    
+    try:
+        student = Student.objects.get(pk=student_id)
+        #student = student.objects.all()
+        msg = ''
+    except student.DoesNotExist: #ถ้าส่งidบะหาไม่เจอ ให้rediect to room_list
+        return redirect('index')
+
+    if request.method == 'POST':
+        birthday = request.POST.get('date_of_birth').split('/')[::-1]
+        birthday[1], birthday[2] = birthday[2], birthday[1]
+        birthday = '-'.join(birthday)
+        student.fname=request.POST.get('first_name')
+        student.lname=request.POST.get('last_name')
+        student.stu_code=request.POST.get('username')
+        student.date_of_birth=birthday
+        student.age=request.POST.get('age')
+        student.gender=request.POST.get('gender')
+        student.tel=request.POST.get('tel')
+        student.email=request.POST.get('email')
+        student.address=request.POST.get('address')
+        student.class_room=request.POST.get('class')
+        student.track=request.POST.get('track')
+        student.parent_id=Parent.objects.get(pk=request.POST.get('parent'))
+        student.teacher_id = Teacher.objects.get(pk=request.POST.get('teacher'))
+        student.save()
+        msg = 'SUCCESSFULLY UPDATE STUDENT ID : %s' % (student.id)
+    
+    context = {
+        'student': student,    
+        'msg': msg
+    }
+
+    return render(request, 'school/student_add.html', context=context)
+
+def student_delete(request, student_id):
+    """
+        #ลบข้อมูล classparent โดยลบข้อมูลที่มี id = class_id
+    """
+    student = Student.objects.get(id = student_id)
+    student.delete()
+    return redirect(to='index')
+
+def parent_detail(request, parent_id):
+    """
+        Class detail page – เมื่อกด link จากหน้า Index page มาจะได้หน้าจอแสดงรายละเอียดของแต่ละวิชา 
+        (วิชานี้สอนอะไร, มีจำนวนนักเรียนกี่คน, มีคนมาเรียน และขาดกี่คน)
+    """
+    #student = request.user.student
+    parent = Parent.objects.get(pk=parent_id)
+   #student = Student.objects.all()
+    return render(request, 'school/parentdetail.html', context={
+        'parent': parent
+        #'std' : student_id
+        
+    })
+
 def parent_add(request):
     """
         เพิ่มข้อมูล นักเรียน ใหม่เข้าสู่ฐานข้อมูล
@@ -127,14 +204,14 @@ def parent_add(request):
     msg = ''
     if request.method == 'POST':
         parent = Parent.objects.create(
-            fname = request.POST.get('first_name1'),
-            lname = request.POST.get('last_name1'),
+            fname = request.POST.get('first_name'),
+            lname = request.POST.get('last_name'),
             relation = request.POST.get('relation'),
             work = request.POST.get('work'),
             income = request.POST.get('income'),
-            tel = request.POST.get('tel1'),
-            email = request.POST.get('email1'),
-            address = request.POST.get('address1'),
+            tel = request.POST.get('tel'),
+            email = request.POST.get('email'),
+            address = request.POST.get('address'),
             type_house = request.POST.get('type_house'),
             
         )
@@ -156,21 +233,20 @@ def parent_update(request, parent_id):
     
     try:
         parent = Parent.objects.get(pk=parent_id)
-        parent = Parent.objects.all()
+        #parent = Parent.objects.all()
         msg = ''
     except parent.DoesNotExist: #ถ้าส่งidบะหาไม่เจอ ให้rediect to room_list
         return redirect('index')
 
     if request.method == 'POST':
-        parent.parent_id=request.POST.get('parent_id')
-        parent.fname=request.POST.get('first_name1')
-        parent.lname=request.POST.get('last_name1')
+        parent.fname=request.POST.get('first_name')
+        parent.lname=request.POST.get('last_name')
         parent.relation=request.POST.get('relation')
         parent.work=request.POST.get('work')
         parent.income=request.POST.get('income')
-        parent.tel=request.POST.get('tel1')
-        parent.email=request.POST.get('email1')
-        parent.address=request.POST.get('address1')
+        parent.tel=request.POST.get('tel')
+        parent.email=request.POST.get('email')
+        parent.address=request.POST.get('address')
         parent.type_house=request.POST.get('type_house')
 
         parent.save()
@@ -191,46 +267,7 @@ def parent_delete(request, parent_id):
     parent.delete()
     return redirect(to='index')
 
-'''
-def student_update(request, student_id):
-    """
-        #Update ข้อมูลนักเรียนที่มี id = student_id
-    """
-    
-    try:
-        student = Student.objects.get(pk=student_id)
-        student = Student.objects.all()
-        
-        msg = ''
-    except Student.DoesNotExist: #ถ้าส่งidบะหาไม่เจอ ให้rediect to room_list
-        return redirect('index')
 
-    if request.method == 'POST':
-        student.student_id=request.POST.get('student_id')
-        student.name=request.POST.get('name')
-        student.open_time=request.POST.get('open_time')
-        student.close_time=request.POST.get('close_time')
-        student.capacity=request.POST.get('capacity')
-
-        student.save()
-        msg = 'SUCCESSFULLY UPDATE STUDENT : %s' % (student.name)
-    
-    context = {
-        'student': student,    
-        'msg': msg
-    }
-
-    return render(request, 'school/school_add.html', context=context)
-'''
-'''
-def student_delete(request, student_id):
-    """
-        #ลบข้อมูล classstudent โดยลบข้อมูลที่มี id = class_id
-    """
-    student = Student.objects.get(id = student_id)
-    student.delete()
-    return redirect(to='index')
-'''
 def teacher(request):
     
     teacher = Teacher.objects.all()
@@ -283,18 +320,50 @@ def teacher_update(request, teacher_id):
     
     try:
         teacher = Teacher.objects.get(pk=teacher_id)
-        teacher = Teacher.objects.all()
+        #parent = Parent.objects.all()
+        msg = ''
+    except teacher.DoesNotExist: #ถ้าส่งidบะหาไม่เจอ ให้rediect to room_list
+        return redirect('index')
+
+    if request.method == 'POST':
+        teacher.fname=request.POST.get('fname')
+        teacher.lname=request.POST.get('lname')
+        teacher.tea_code=request.POST.get('username')
+        teacher.room=request.POST.get('room')
+        teacher.tel=request.POST.get('tel')
+        teacher.email=request.POST.get('email')
+ 
+
+        teacher.save()
+        msg = 'SUCCESSFULLY UPDATE TEACHER ID : %s' % (teacher.id)
+    
+    context = {
+        'teacher': teacher,    
+        'msg': msg
+    }
+
+    return render(request, 'school/teacher_add.html', context=context)
+
+def teacher_update(request, teacher_id):
+    """
+        #Update ข้อมูลนักเรียนที่มี id = parent_id
+    """
+    
+    try:
+        teacher = Teacher.objects.get(pk=teacher_id)
+        #teacher = Teacher.objects.all()
         msg = ''
     except teacher.DoesNotExist:
         return redirect('index')
 
     if request.method == 'POST':
-        teacher.teacher_id=request.POST.get('teacher_id'),
-        teacher.fname=request.POST.get('fname'),
-        teacher.lname=request.POST.get('lname'),
-        teacher.tel=request.POST.get('tel1'),
-        teacher.email=request.POST.get('email1'),
-        teacher.tea_code=request.POST.get('tea_code'),
+        teacher.fname=request.POST.get('fname')
+        teacher.lname=request.POST.get('lname')
+        teacher.tea_code=request.POST.get('tea_code')
+        teacher.room=request.POST.get('room')
+        teacher.tel=request.POST.get('tel')
+        teacher.email=request.POST.get('email')
+        
         
         teacher.save()
         msg = 'SUCCESSFULLY UPDATE TEACHER ID : %s' % (teacher.id)
@@ -304,7 +373,7 @@ def teacher_update(request, teacher_id):
         'msg': msg
     }
 
-    return render(request, 'school/teacher.html', context=context)
+    return render(request, 'school/teacher_add.html', context=context)
 
 def teacher_delete(request, teacher_id):
     
@@ -315,19 +384,30 @@ def teacher_delete(request, teacher_id):
 
 def course(request):
     
-
-    context = {}
-
+    course = Course.objects.all()
     
-    return render(request, template_name='school/course.html', context=context)
+    
+    return render(request, template_name='school/course.html', context={
+        'course' : course
+    })
+
 
 def course_add(request):
     """
         เพิ่มข้อมูล room ใหม่เข้าสู่ฐานข้อมูล
     """
-    context = {}
-
-    return render(request, 'school/course_add.html', context=context)
+    
+    if request.method == 'POST':
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = CourseForm()
+        
+    return render(request, 'school/course_add.html', context={
+        'form': form
+    })
 
 def school_list(request):
     """
