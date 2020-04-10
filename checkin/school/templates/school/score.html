@@ -5,9 +5,9 @@
     </h2><hr class="bg-light">
     <p class="card-text">
         <h5 class="card-title text-light">INFORMATION</h5>
-        <p>FIRSTNAME : &emsp;&emsp;LASTNAME : &emsp;&emsp;STUDENT ID : </p>
-        <p>CLASS : &emsp;&emsp;STUDENT NO. : &emsp;&emsp;TRACK : </p>
-        <p>SCORE : &emsp;&emsp;</p>
+        <p>ระบบคัดกรองคะแนนความประพฤตินักเรียนทุกคน <b>สามารถเช็คคะแนนความประพฤติได้จากรหัสประจำตัวคุณ</b><br/><br/>
+            <b>รหัสประจำตัวของคุณ : <u>{{request.user.username}}</u></b><br/></p>
+        
     </p>
     <h5 class="card-title text-light">LIST</h5>
         <hr class="bg-light">
@@ -28,7 +28,7 @@
                     <td>{{ std.lname }}</td>
                     <td>{{ std.stu_code }}</td>
                     <td>100</td>
-                    <td><a href="{% url 'scoreedit' %}">
+                    <td><a href="{% url 'scoreedit' std.id%}">
                         <div class="btn btn-warning" id="test">EDIT</div>
                     </a><td>
                     

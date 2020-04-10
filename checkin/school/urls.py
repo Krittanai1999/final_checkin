@@ -26,5 +26,5 @@ urlpatterns = [
     path('class_list/check_class', views.check_class, name='check_class'),
     path('detailclass/<int:course_id>/', views.detailclass, name='detailclass'),
     path('score/', views.score, name='score'),
-    path('score/edit', views.scoreedit, name='scoreedit'),
+    path('score/edit/<int:student_id>/', views.scoreedit, name='scoreedit'),
 ]

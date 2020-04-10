@@ -482,10 +482,12 @@ def score(request):
         'student':student
     })
 
-def scoreedit(request):
+def scoreedit(request, student_id):
     """
         เพิ่มข้อมูล room ใหม่เข้าสู่ฐานข้อมูล
     """
-    context = {}
+    student = Student.objects.get(pk = student_id)
 
-    return render(request, 'school/scoreedit.html', context=context)
+    return render(request, 'school/scoreedit.html', context={
+        'student' : student
+    })

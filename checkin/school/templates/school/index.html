@@ -27,35 +27,17 @@
     </form><br />
     <div class="card">
         <div class="card-header">
-            STUDENT
+            WELCOME TO CHECK IN SCHOOL
         </div>
         <div class="card-body">
-            <h5 class="card-title">INFORMATION</h5>
-            <p class="card-text">FIRSTNAME : {{request.user.student.fname}}&emsp;&emsp;LASTNAME : {{request.student.lname}}
-                {{request.student.lname}}&emsp;&emsp;STUDENT ID : {{request.user.username}}</p>
-            <p class="card-text">DATE OF BIRTH : {{request.student.date_of_birth}}&emsp;&emsp;AGE :
-                {{request.student.age}}&emsp;&emsp;GENDER : {{request.student.gender}}</p>
-            <p class="card-text">MOBILE NO : {{request.student.tel}}&emsp;&emsp;EMAIL : {{request.student.email}}</p>
-            <p class="card-text">ADDRESS : {{request.student.adress}}</p>
-            <p class="card-text">CLASS : {{request.student.lname}}&emsp;&emsp;STUDENT NO : &emsp;&emsp;TRACK : </p>
+            <h5 class="card-title">ขอต้อนรับเข้าสู่ระบบเช็คการเข้า-ออกของโรงเรียน</h5>
+            <p class="card-text">
+            หากคุณต้องการดูข้อมูลส่วนตัวนักเรียนสามารถค้นหา หรือเลือกได้ โดยเช็คในตาราง COLUMN NAME : STUDENT ID (รหัสประจำตัว)<br/>แล้วสามารถกดปุ่ม VIEW DETAIL เพื่อดูประวัติ<br/><br/>
+            <b>รหัสประจำตัวของคุณ : <u>{{request.user.username}}</u></b><br/>
+            EMAIL ของคุณ : {{request.user.email}}</p>
 
         </div>
-        <div class="card-header">
-            PARENT
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">INFORMATION</h5>
-            <p class="card-text">FIRSTNAME : &emsp;&emsp;LASTNAME : </p>
-            <p class="card-text">REALATION : &emsp;&emsp;OCCUPATION : &emsp;&emsp;INCOME : </p>
-            <p class="card-text">MOBILE NO : &emsp;&emsp;EMAIL : </p>
-            <p class="card-text">ADDRESS :</p>
-        </div>
-        <div class="card-header">
-            TEACHER :
-        </div>
-        <div class="card-header">
-            SCORE :
-        </div>
+        
     </div><br />
     <h5 class="card-title text-light">LIST STUDENT</h5>
     <hr class="bg-light">
