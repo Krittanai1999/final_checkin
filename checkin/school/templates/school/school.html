@@ -6,23 +6,10 @@
     <hr class="bg-light">
     <p class="card-text">
         <h5 class="card-title text-light">INFORMATION</h5>
-        <p>FIRSTNAME : &emsp;&emsp;LASTNAME : &emsp;&emsp;STUDENT ID : </p>
-        <p>CLASS : &emsp;&emsp;STUDENT NO. : &emsp;&emsp;TRACK : </p>
-        <p>SCORE : &emsp;&emsp;</p>
-        <p>CHECK IN SCHOOl : <a href="{% url 'check_school' %}"><button type="button"
+        <p>STUDENT ID : {{request.user.username}}</p>
+        <p>CHECK IN SCHOOl : <a href="#"><button type="button"
                     class="btn btn-secondary ml-3 btn btn-success ">CHECK IN</button></a></p>
-        <h5 class="card-title text-light">TOTAL</h5>
-        <hr class="bg-light">
         <div class="row"></div>
-        <span class="btn btn-warning">
-            Total Students: <span class="badge badge-light">1000</span>
-        </span>
-        <span class="btn btn-success">
-            Attend: <span class="badge badge-light">250</span>
-        </span>
-        <span class="btn btn-danger">
-            Absent: <span class="badge badge-light">750</span>
-        </span>
         <br /><br />
         <h5 class="card-title text-light">LIST</h5>
         <hr class="bg-light">
@@ -32,32 +19,28 @@
                     <th scope="col">FIRSTNAME</th>
                     <th scope="col">LASTNAME</th>
                     <th scope="col">STUDENT ID</th>
+                   
                     <th scope="col">STATUS</th>
+                    
                 </tr>
             </thead>
             <tbody class="text-center">
-                {% for bk in booking %}
+                {% for std in student %}
                 <tr>
-                    <td>{{ bk.room_id.name}}</td>
-                    <td>{{ bk.book_date }}</td>
-                    <td>{{ bk.start_time }} - {{ bk.end_time}}</td>
-                    <td>{{ bk.room_id.open_time }} - {{ bk.room_id.close_time }}</td>
-                    {% if bk.status == True %}
+                    <td>{{ std.fname }}</td>
+                    <td>{{ std.lname }}</td>
+                    <td>{{ std.stu_code}}</td>
+                    {% if std.status == True %}
                     <td>
-                        <p class="text-success">APPROVE</p>
+                        <p class="text-success">ATTEND</p>
                     </td>
                     {% else %}
                     <td>
-                        <p class="text-warning">HOLD ON</p>
+                        <p class="text-warning">ABSENT</p>
                     </td>
                     {% endif %}
-                    {% if perms.room.change_booking %}
-                    <td>
-                        <a href="{% url 'requestlist_edit' bk.id %}">
-                            <div class="btn btn-warning" id="test">EDIT</div>
-                        </a>
                     </td>
-                    {% endif %}
+                    
                 </tr>
                 {% endfor %}
             </tbody>

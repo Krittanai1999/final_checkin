@@ -3,9 +3,11 @@
 <div class="container">
     <h2 class="text-light">CHECK IN SCHOOL
     </h2><hr class="bg-light">
+    <form action="{% url 'check_school' std.id %}" method="POST">
+      {% csrf_token %}
     <p class="card-text">
         <h5 class="card-title text-light">INFORMATION</h5>
-        <p>FIRSTNAME : &emsp;&emsp;LASTNAME : &emsp;&emsp;STUDENT ID : </p>
+        <p>FIRSTNAME : {{ rg.student.fname }}LASTNAME : &emsp;&emsp;STUDENT ID : </p>
         <p>CLASS : &emsp;&emsp;STUDENT NO. : &emsp;&emsp;TRACK : </p>
         <p>SCORE : &emsp;&emsp;</p>
         <p class="card-text">CLICK CHECK IN
@@ -15,6 +17,7 @@
             </div>
           </p>
           <button type="submit" class="btn btn-primary ml-3">SUMMIT</button>
+        </form>
 </div>
 {% endblock %}
 

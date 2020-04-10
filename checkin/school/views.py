@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.db.models import Q
 
-from school.models import Student, Parent, Teacher, Course
+from school.models import Student, Parent, Teacher, Course, Regis_school
 from school.forms import CourseForm
 
 
@@ -48,7 +48,9 @@ def index(request):
     """
         Index page - หน้าจอรายการนักเรียนทั้งหมด
     """
+    print(request.user)
     #student = Student.objects.get(pk=student_id)
+    user = User.objects.all()
     student = Student.objects.all()
     parent = Parent.objects.all()
     search = request.GET.get('search', '')
@@ -61,7 +63,8 @@ def index(request):
    
     return render(request, 'school/index.html', context={
         'student': student,
-        'parent' : parent
+        'parent' : parent,
+        'user': user
     })
 
 def student_detail(request, student_id):
@@ -92,7 +95,10 @@ def student_add(request):
         user = User.objects.create_user(
             request.POST.get('username'),
             request.POST.get('email'),
+            #request.POST.get('first_name'),
+            #request.POST.get('last_name'),
             '1234',
+            
         )
         group = Group.objects.get(name='student')
         user.groups.add(group)
@@ -287,7 +293,9 @@ def teacher_add(request):
         user = User.objects.create_user(
             request.POST.get('username'),
             request.POST.get('email'),
-            '1234',
+           # request.POST.get('first_name'),
+            #request.POST.get('last_name'),
+            '1234'
         )
         group = Group.objects.get(name='teacher')
         user.groups.add(group)
@@ -414,24 +422,36 @@ def school_list(request):
         เพิ่มข้อมูล room ใหม่เข้าสู่ฐานข้อมูล
     """
     context = {}
+    student = Student.objects.all()
 
-    return render(request, 'school/school.html', context=context)
-
-def check_school(request):
-    """
-        เพิ่มข้อมูล room ใหม่เข้าสู่ฐานข้อมูล
-    """
-    context = {}
-
-    return render(request, 'school/check_school.html', context=context)
-
+    return render(request, 'school/school.html', context={
+        'student':student
+    })
+"""
+def check_school(request, student_id):
+   
+    student = Student.objects.all()
+    regis = Regis_school.objects.all()
+    if request.method == 'POST':
+        if request.POST.get('checkbox') == 'comfirm':
+            check_type = True
+        else:
+            check_type = False
+    return render(request, 'school/check_school.html', context={
+        
+        'student': student
+    })
+"""
 def class_list(request):
     """
         เพิ่มข้อมูล room ใหม่เข้าสู่ฐานข้อมูล
     """
     context = {}
+    course = Course.objects.all()
 
-    return render(request, 'school/class.html', context=context)
+    return render(request, 'school/class.html', context={
+        'course' : course
+    })
 
 def check_class(request):
     """
@@ -441,21 +461,26 @@ def check_class(request):
 
     return render(request, 'school/check_class.html', context=context)
 
-def detailclass(request):
+def detailclass(request, course_id):
     """
         เพิ่มข้อมูล room ใหม่เข้าสู่ฐานข้อมูล
     """
-    context = {}
+    
+    course = Course.objects.get(pk = course_id)
 
-    return render(request, 'school/detailclass.html', context=context)
+    return render(request, 'school/detailclass.html', context={
+        'course' : course
+    })
 
 def score(request):
     """
         เพิ่มข้อมูล room ใหม่เข้าสู่ฐานข้อมูล
     """
     context = {}
-
-    return render(request, 'school/score.html', context=context)
+    student = Student.objects.all()
+    return render(request, 'school/score.html', context={
+        'student':student
+    })
 
 def scoreedit(request):
     """

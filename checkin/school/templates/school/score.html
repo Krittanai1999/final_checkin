@@ -22,19 +22,19 @@
                 </tr>
             </thead>
             <tbody class="text-center">
-              
+                {% for std in student %}
                 <tr>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>{test</td>
-                    <td>{test</td>
+                    <td>{{ std.fname }}</td>
+                    <td>{{ std.lname }}</td>
+                    <td>{{ std.stu_code }}</td>
+                    <td>100</td>
                     <td><a href="{% url 'scoreedit' %}">
                         <div class="btn btn-warning" id="test">EDIT</div>
                     </a><td>
                     
                  
                 </tr>
-                
+                {% endfor %}
             </tbody>
         </table>
 </div>

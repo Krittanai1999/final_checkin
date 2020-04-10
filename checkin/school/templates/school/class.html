@@ -13,22 +13,18 @@
         </div>
         <button type="submit" class="btn btn-primary ml-3">SEARCH</button>
     </form><br/>
+    
     <p class="card-text">
+        {% for c in course %}
         <div class="card">
-            <h5 class="card-header">COURSE ID : <br>SUBJECT :</h5>
+            <h5 class="card-header">COURSE ID : {{ c.course_id }}<br>SUBJECT : {{ c.name }}</h5>
             <div class="card-body">
-                <!--
-                <p class="card-text">SUBJECT :</p>
-                <p class="card-text">TEACHER :</p>
-                <p class="card-text">DAY :</p>
-                <p class="card-text">TIME :</p>
-                <p class="card-text">CAPACITY :</p>-->
-                <p class="card-text">CHECK IN CLASS : <a href="{% url 'check_class' %}"><button type="button"
-                            class="btn btn-secondary ml-3 btn btn-success ">CHECK IN</button></a>&emsp;&emsp;&emsp;&emsp;
-                DETAIL : <a href="{% url 'detailclass' %}"><button type="button"
-                            class="btn btn-secondary ml-3 btn btn-warning ">DETAIL</button></a></p>
+                DETAIL : <a href="{% url 'detailclass' c.id  %}"><button type="button"
+                            class="btn btn-secondary ml-3 btn btn-warning ">CHECK IN/DETAIL</button></a></p>
             </div>
-        </div>
+        </div></br/>
+        {% endfor %}
     </p>
+
 </div>
 {% endblock %}

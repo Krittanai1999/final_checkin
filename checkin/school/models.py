@@ -49,11 +49,7 @@ class Student(models.Model):
 
 class Regis_school(models.Model):
     datetime = models.DateTimeField(auto_now=False, auto_now_add=False)
-    TYPE = (
-        ('IN', 'in'),
-        ('OUT', 'out')
-    )
-    check_type =  models.CharField(max_length=3, choices=TYPE)
+    check_type =  models.BooleanField()
     score = models.SmallIntegerField()
     student = models.ForeignKey(Student, on_delete=models.PROTECT)
 

@@ -7,11 +7,12 @@
     <p class="card-text">
         <p class="card-text">
             <h5 class="card-title text-light">INFORMATION</h5>
-            <p class="card-text">COURSE ID :</p>
-            <p class="card-text">SUBJECT :</p>
-            <p class="card-text">TEACHER :</p>
-            <p class="card-text">TIME :</p>
-            <p class="card-text">CAPACITY :</p>
+            <p class="card-text">COURSE ID : {{ course.course_id }}</p>
+            <p class="card-text">SUBJECT : {{ course.name }}</p>
+            <p class="card-text">TEACHER : ยังไม่มี </p>
+            <p class="card-text">DAY : {{ course.weekday }}</p>
+            <p class="card-text">TIME : {{ course.start_time }} - {{ course.end_time }}</p>
+            <p class="card-text">CAPACITY : {{ course.capacity }}</p>
         </p>
 
 
@@ -19,7 +20,7 @@
 <hr class="bg-light">
 <div class="row"></div>
 <span class="btn btn-warning">
-    Total Students: <span class="badge badge-light">1000</span>
+    Total Students: <span class="badge badge-light">{{ course.capacity }}</span>
 </span>
 <span class="btn btn-success">
     Attend: <span class="badge badge-light">250</span>
@@ -40,30 +41,16 @@
         </tr>
     </thead>
     <tbody class="text-center">
-        {% for bk in booking %}
+        
         <tr>
-            <td>{{ bk.room_id.name}}</td>
-            <td>{{ bk.book_date }}</td>
-            <td>{{ bk.start_time }} - {{ bk.end_time}}</td>
-            <td>{{ bk.room_id.open_time }} - {{ bk.room_id.close_time }}</td>
-            {% if bk.status == True %}
-            <td>
-                <p class="text-success">APPROVE</p>
-            </td>
-            {% else %}
-            <td>
-                <p class="text-warning">HOLD ON</p>
-            </td>
-            {% endif %}
-            {% if perms.room.change_booking %}
-            <td>
-                <a href="{% url 'requestlist_edit' bk.id %}">
-                    <div class="btn btn-warning" id="test">EDIT</div>
-                </a>
-            </td>
-            {% endif %}
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+            <td>tset</td>
+           
+            
         </tr>
-        {% endfor %}
+        
     </tbody>
 </table>
 
